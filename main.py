@@ -29,7 +29,7 @@ select
         else:
             insert_sql += f"{column_name},\n    "
 
-    insert_sql = insert_sql[:-2] + f"\nfrom {staging_table_name};"
+    insert_sql = insert_sql[:-6] + f"\nfrom {staging_table_name};"
 
 
 
