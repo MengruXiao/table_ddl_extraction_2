@@ -25,16 +25,16 @@ select
 
     for column_name, type in filtered_df_dict.items():
 
-        # if not type.startswith('varchar'):
-        insert_sql += f"cast({column_name} as {type}),\n    "
-        # else:
-        #     insert_sql += f"{column_name},\n    "
+        if not type.startswith('varchar'):
+            insert_sql += f"cast({column_name} as {type}),\n    "
+        else:
+            insert_sql += f"{column_name},\n    "
 
     insert_sql = insert_sql[:-6] + f"\nfrom {staging_table_name};"
 
 
 
-    delete_sql = f'''delete from {table_name} \nwhere record_id in (select record_id from {table_name.split(".")[0]}.staging_{table_name.split(".")[1]});'''
+    delete_sql = f'''delete from {table_name} \nwhere id in (select id from {table_name.split(".")[0]}.staging_{table_name.split(".")[1]});'''
 
 
     sql = delete_sql+'\n'+'\n'+insert_sql
