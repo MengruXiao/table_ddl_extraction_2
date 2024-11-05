@@ -34,7 +34,7 @@ select
 
 
 
-    delete_sql = f'''delete from {table_name} \nwhere id in (select id from {table_name.split(".")[0]}.staging_{table_name.split(".")[1]});'''
+    delete_sql = f'''delete from {table_name} \nwhere record_id in (select record_id from {table_name.split(".")[0]}.staging_{table_name.split(".")[1]});'''
 
 
     sql = delete_sql+'\n'+'\n'+insert_sql
