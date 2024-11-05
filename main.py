@@ -24,10 +24,11 @@ select
     filtered_df_dict = dict(zip(df["column_name"], df["type"]))
 
     for column_name, type in filtered_df_dict.items():
-        if not type.startswith('varchar'):
-            insert_sql += f"cast({column_name} as {type}),\n    "
-        else:
-            insert_sql += f"{column_name},\n    "
+
+        # if not type.startswith('varchar'):
+        insert_sql += f"cast({column_name} as {type}),\n    "
+        # else:
+        #     insert_sql += f"{column_name},\n    "
 
     insert_sql = insert_sql[:-6] + f"\nfrom {staging_table_name};"
 
